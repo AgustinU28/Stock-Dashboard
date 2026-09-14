@@ -50,9 +50,19 @@ SQL Editor → pegar el contenido → Run):
 
 ### 4. Crear un usuario
 
-La app no tiene alta pública de usuarios (es una herramienta de un solo
-mostrador, no un producto multi-tenant). Creá tu login en Supabase
-dashboard → **Authentication → Users → Add user**.
+`/login` tiene un formulario de registro ("Crear cuenta") ademas del de
+inicio de sesion. Si tu proyecto de Supabase tiene "Confirm email" activado
+(Authentication → Providers → Email), vas a tener que confirmar el mail
+antes de poder ingresar — si preferis saltarte eso para un uso personal,
+desactivalo ahi, o cargá el usuario directo desde Supabase dashboard →
+**Authentication → Users → Add user**.
+
+> Cualquiera que llegue a `/login` puede crear una cuenta y va a tener
+> acceso completo de lectura/escritura (las políticas RLS solo exigen
+> "autenticado", no un usuario específico) — razonable mientras el proyecto
+> corre en local o no está linkeado públicamente; si lo desplegás en un
+> dominio público, considerá sacar el self-signup o agregar una allowlist
+> de emails.
 
 ### 5. (Opcional) poblar datos de ejemplo
 

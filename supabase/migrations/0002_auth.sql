@@ -1,8 +1,10 @@
 -- ============================================================================
 -- 0002_auth.sql
--- Locks every table down to authenticated users. The app has no public
--- sign-up (it's a single-counter tool, not a multi-tenant product) — create
--- logins via the Supabase dashboard: Authentication -> Users -> Add user.
+-- Locks every table down to authenticated users. Any authenticated user gets
+-- full read/write (there's no per-user scoping) — /login exposes self-signup,
+-- so anyone who can reach it can register and get access. Fine while this
+-- runs locally/privately; add an email allowlist or disable signup before
+-- exposing it publicly.
 -- ============================================================================
 
 drop policy if exists "public read products" on public.products;
