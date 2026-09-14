@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 import type { Product, Sale } from "@/types/database";
 import { dateKey } from "@/lib/utils/format";
 import { KpiCard } from "@/components/dashboard/kpi-card";
@@ -43,7 +43,11 @@ export function DashboardLive({
   const ticketFlashTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const productsRef = useRef(products);
-  productsRef.current = products;
+  useEffect(() => {
+    productsRef.current = products;
+  }, [products]);
+
+  const [supabase] = useState(() => createClient());
 
   useEffect(() => {
     const channel = supabase
@@ -108,7 +112,7 @@ export function DashboardLive({
       clearTimeout(productFlashTimeout.current);
       clearTimeout(ticketFlashTimeout.current);
     };
-  }, []);
+  }, [supabase]);
 
   const lowStockCount = useMemo(
     () => products.filter((p) => p.stock_quantity <= LOW_STOCK_THRESHOLD).length,
@@ -120,14 +124,9 @@ export function DashboardLive({
   return (
     <div className="mx-auto max-w-[1400px] px-6 py-8">
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
-            Panel del mostrador
-          </p>
-          <h1 className="font-display text-4xl font-medium tracking-tight text-foreground">
-            Ventas y stock
-          </h1>
-        </div>
+        <h1 className="font-display text-3xl font-medium tracking-tight text-foreground">
+          Resumen
+        </h1>
         <span className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground">
           <span className="relative flex h-2 w-2">
             {connected && (

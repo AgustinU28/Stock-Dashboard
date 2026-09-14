@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import { dateKey } from "@/lib/utils/format";
 import { DashboardLive } from "@/components/dashboard/dashboard-live";
 import type { DailyTotal } from "@/components/dashboard/sales-chart";
@@ -28,6 +28,8 @@ function buildDailyTotals(sales: Sale[]): DailyTotal[] {
 }
 
 export default async function DashboardPage() {
+  const supabase = await createClient();
+
   const since = new Date();
   since.setUTCDate(since.getUTCDate() - (HISTORY_DAYS - 1));
 

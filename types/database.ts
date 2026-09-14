@@ -27,3 +27,7 @@ export interface StockMovement {
 export interface SaleWithProduct extends Sale {
   product: Pick<Product, "id" | "name" | "sku"> | null;
 }
+
+export interface StockMovementWithProduct extends StockMovement {
+  product: Pick<Product, "id" | "name" | "sku"> | null;
+}

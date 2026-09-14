@@ -20,6 +20,14 @@ const dayLabelFormatter = new Intl.DateTimeFormat("es-AR", {
   month: "2-digit",
 });
 
+const dateTimeFormatter = new Intl.DateTimeFormat("es-AR", {
+  day: "2-digit",
+  month: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+
 export function formatCurrency(value: number): string {
   return currencyFormatter.format(value);
 }
@@ -34,6 +42,10 @@ export function formatTime(iso: string): string {
 
 export function formatDayLabel(iso: string): string {
   return dayLabelFormatter.format(new Date(iso));
+}
+
+export function formatDateTime(iso: string): string {
+  return dateTimeFormatter.format(new Date(iso));
 }
 
 export function dateKey(iso: string): string {
