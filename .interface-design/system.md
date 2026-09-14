@@ -85,9 +85,9 @@ dominant KPI) -> hint 12px/muted below.
 
 - Dark mode tokens exist and are wired, but no theme-toggle UI has been
   built yet — `.dark` class is inert until something adds it.
-- If adding more pages/nav, keep the masthead pattern (kicker label above a
-  Fraunces `h1`, live-connection pill on the right) rather than a generic
-  sidebar — navigation should still read as "the mostrador", not scaffolding.
-- `next dev` panics on Turbopack on this Windows machine (CSS/PostCSS
-  subprocess crash, `0xc0000142`). Use `next dev --webpack` until that's
-  root-caused; unrelated to this design system.
+- Multi-page nav now exists in `app/(app)/layout.tsx`: brand + tabs
+  (`NavTabs`) on the left, user email + sign-out on the right. Per-page
+  headers stay a simple `h1` (e.g. "Resumen", "Productos") — the brand
+  identity lives in the shared shell, don't repeat it per page.
+- The whole app is now gated by Supabase Auth (see README) — `/login` is
+  outside the `(app)` route group and has no nav shell.

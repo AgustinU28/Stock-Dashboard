@@ -71,22 +71,12 @@ npm run dev
 
 Abrí http://localhost:3000 — te va a redirigir a `/login`.
 
-#### Windows + Turbopack
-
-`next dev` (Turbopack, default en Next 16) crashea en algunos entornos
-Windows al procesar `globals.css` (panic nativo `0xc0000142` en un
-subproceso de PostCSS). Si te pasa, usá el fallback con webpack:
-
-```bash
-npm run dev:webpack
-```
-
 ## Scripts
 
 | Comando | Qué hace |
 |---|---|
 | `npm run dev` | Servidor de desarrollo (Turbopack) |
-| `npm run dev:webpack` | Servidor de desarrollo (webpack, workaround Windows) |
+| `npm run dev:webpack` | Servidor de desarrollo con webpack en vez de Turbopack (fallback) |
 | `npm run build` | Build de producción |
 | `npm run start` | Sirve el build de producción |
 | `npm run lint` | ESLint |
